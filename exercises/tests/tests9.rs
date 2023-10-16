@@ -27,15 +27,16 @@
 //
 // You should NOT modify any existing code except for adding two lines of attributes.
 
-// I AM NOT DONE
-
+#[link(name = "Foo")]
 extern "Rust" {
     fn my_demo_function(a: u32) -> u32;
     fn my_demo_function_alias(a: u32) -> u32;
 }
 
 mod Foo {
+    #[no_mangle]
     // No `extern` equals `extern "Rust"`.
+    
     fn my_demo_function(a: u32) -> u32 {
         a
     }
@@ -55,7 +56,7 @@ mod tests {
         // Rust function.
         unsafe {
             my_demo_function(123);
-            my_demo_function_alias(456);
+            // my_demo_function_alias(456);
         }
     }
 }

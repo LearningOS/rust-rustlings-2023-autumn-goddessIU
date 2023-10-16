@@ -27,7 +27,6 @@ enum IntoColorError {
     IntConversion,
 }
 
-// I AM NOT DONE
 
 // Your task is to complete this implementation and return an Ok result of inner
 // type Color. You need to create an implementation for a tuple of three
@@ -41,6 +40,28 @@ enum IntoColorError {
 impl TryFrom<(i16, i16, i16)> for Color {
     type Error = IntoColorError;
     fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
+        let b: u8 = match tuple.0.try_into() {
+            Ok(b1) => b1,
+            Err(e) => {
+                return Err(Self::Error::IntConversion)
+            }
+        };
+
+        let c: u8 = match tuple.1.try_into() {
+            Ok(b1) => b1,
+            Err(e) => {
+                return Err(Self::Error::IntConversion)
+            }
+        };
+
+        let d: u8 = match tuple.2.try_into() {
+            Ok(b1) => b1,
+            Err(e) => {
+                return Err(Self::Error::IntConversion)
+            }
+        };
+
+        Ok(Color{red: b, green: c, blue: d})
     }
 }
 
@@ -48,6 +69,28 @@ impl TryFrom<(i16, i16, i16)> for Color {
 impl TryFrom<[i16; 3]> for Color {
     type Error = IntoColorError;
     fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {
+        let b: u8 = match arr[0].try_into() {
+            Ok(b1) => b1,
+            Err(e) => {
+                return Err(Self::Error::IntConversion)
+            }
+        };
+
+        let c: u8 = match arr[1].try_into() {
+            Ok(b1) => b1,
+            Err(e) => {
+                return Err(Self::Error::IntConversion)
+            }
+        };
+
+        let d: u8 = match arr[2].try_into() {
+            Ok(b1) => b1,
+            Err(e) => {
+                return Err(Self::Error::IntConversion)
+            }
+        };
+
+        Ok(Color{red: b, green: c, blue: d})
     }
 }
 
@@ -55,6 +98,32 @@ impl TryFrom<[i16; 3]> for Color {
 impl TryFrom<&[i16]> for Color {
     type Error = IntoColorError;
     fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {
+        if slice.len() != 3 {
+            return Err(Self::Error::BadLen);
+        }
+
+        let b: u8 = match slice[0].try_into() {
+            Ok(b1) => b1,
+            Err(e) => {
+                return Err(Self::Error::IntConversion)
+            }
+        };
+
+        let c: u8 = match slice[1].try_into() {
+            Ok(b1) => b1,
+            Err(e) => {
+                return Err(Self::Error::IntConversion)
+            }
+        };
+
+        let d: u8 = match slice[2].try_into() {
+            Ok(b1) => b1,
+            Err(e) => {
+                return Err(Self::Error::IntConversion)
+            }
+        };
+
+        Ok(Color{red: b, green: c, blue: d})
     }
 }
 
